@@ -4,3 +4,8 @@
     background-repeat: no-repeat;
     background-position: 300px center;
 }
+
+.header-channel-section {
+    display: flex;
+    flex-direction: row;
+}

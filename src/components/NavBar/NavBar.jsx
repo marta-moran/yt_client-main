@@ -17,6 +17,7 @@ import { Link } from '@mui/material';
 import { ColorContext } from '../../contexts/color.context';
 import { AuthContext } from '../../contexts/auth.context'
 import { ThemeProvider } from '@mui/material/styles';
+import './NavBar.css'
 
 const pages = ['Home', 'Search'];
 const settings = ['Profile', 'Signup', 'Login', 'Logout'];
@@ -65,7 +66,7 @@ function ResponsiveAppBar() {
                                 textDecoration: 'none',
                             }}
                         >
-                            LOGO
+                            RAVENLOOP
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

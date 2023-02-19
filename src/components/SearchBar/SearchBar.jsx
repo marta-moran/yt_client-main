@@ -3,7 +3,9 @@ import InputUnstyled from '@mui/base/InputUnstyled';
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import SubmitButton from '../../components/SubmitButton/SubmitButton'
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
+import youtubeService from '../../services/youtube.service';
+import ModalInfo from '../Modal/Modal';
 
 const blue = {
     100: '#DAECFF',
@@ -54,18 +56,47 @@ const StyledInputElement = styled('input')(
 const CustomInput = forwardRef(function CustomInput(props, ref) {
 
     const [searchQuery, setSearchQuery] = useState("")
+    const [channel, setChannel] = useState({
+        id: '',
+        snippet: ''
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
 
-        console.log(searchQuery)
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        try {
+            const channels = await youtubeService.getChannels(searchQuery);
+
+            if (channels.items.length > 0) {
+                const channelItem = channels.items[0];
+
+                if (channelItem.id.kind === 'youtube#channel') {
+                    const channelSelected = await youtubeService.getOneChannel(channelItem.id.channelId);
+                    setChannel({ id: channelSelected.items[0].id, snippet: channelSelected.items[0].snippet })
+                    console.log(channel)
+                } else {
+                    console.log('El resultado no es un canal de YouTube.');
+                }
+            } else {
+                console.log('No se encontraron canales de YouTube.');
+            }
+        } catch (err) {
+            console.err(err);
+        }
     }
 
     const handleInputChange = (e) => {
         const { value } = e.target
         setSearchQuery(value)
     }
+
+
+    useEffect(() => {
+        console.log(channel);
+    }, [channel]);
+
+
 
     return (
         <>
@@ -74,6 +105,31 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                 <InputUnstyled onChange={handleInputChange} className='SearchInput' slots={{ input: StyledInputElement }} {...props} ref={ref} />
                 <SubmitButton>Search</SubmitButton>
             </Box>
+            <section className='channel-section'>
+                {
+                    channel && (
+                        <>
+                            <div className='header-channel-section'>
+                                <h2>{channel.snippet.title}</h2>
+                                <ModalInfo description={channel.snippet.description}></ModalInfo>
+                                {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} /> */}
+                            </div>
+                        </>
+                    )
+                }
+
+
+
+
+                {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
+                <ul>
+                    {Object.entries(channel).map(([key, value]) => (
+                        <li key={key}>
+                            <strong>{key}:</strong> {value}
+                        </li>
+                    ))}
+                </ul> */}
+            </section>
         </>
     );
 });
