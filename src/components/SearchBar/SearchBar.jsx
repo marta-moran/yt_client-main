@@ -5,8 +5,8 @@ import { styled } from '@mui/system';
 import SubmitButton from '../../components/SubmitButton/SubmitButton'
 import { forwardRef, useEffect, useState } from 'react';
 import youtubeService from '../../services/youtube.service';
-import ModalInfo from '../Modal/Modal';
-import { Link } from 'react-router-dom';
+// import ModalInfo from '../Modal/Modal';
+
 import VideoList from '../VideoList/VideoList';
 
 
@@ -122,6 +122,10 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
 
     useEffect(() => {
         console.log(channel);
+
+        youtubeService.getChannelStats(channel.id)
+            .then(stats => console.log(stats))
+
     }, [channel]);
 
 

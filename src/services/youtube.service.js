@@ -24,6 +24,10 @@ class YoutubeService {
         return this.api.get(`/videos?key=${process.env.REACT_APP_API_KEY}&id=${videoId}&part=snippet,contentDetails,player`).then(({ data }) => data)
     }
 
+    getChannelStats(channelId) {
+        return this.api.get(`/channels?part=snippet,statistics&id=${channelId}&key=${process.env.REACT_APP_API_KEY}`).then(({ data }) => data)
+    }
+
 
     static getInstance() {
         if (!this.instance) {
