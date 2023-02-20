@@ -6,6 +6,9 @@ import SubmitButton from '../../components/SubmitButton/SubmitButton'
 import { forwardRef, useEffect, useState } from 'react';
 import youtubeService from '../../services/youtube.service';
 import ModalInfo from '../Modal/Modal';
+import { Link } from 'react-router-dom';
+import VideoList from '../VideoList/VideoList';
+
 
 const blue = {
     100: '#DAECFF',
@@ -57,9 +60,13 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
 
     const [searchQuery, setSearchQuery] = useState("")
     const [channel, setChannel] = useState({
-        id: 'a',
+        id: '',
         snippet: ''
     });
+
+    const [videos, setVideos] = useState([])
+    const [canShow, setCanShow] = useState(false)
+
 
 
     const handleSubmit = async (e) => {
@@ -74,7 +81,23 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                 if (channelItem.id.kind === 'youtube#channel') {
                     const channelSelected = await youtubeService.getOneChannel(channelItem.id.channelId);
                     setChannel({ id: channelSelected.items[0].id, snippet: channelSelected.items[0].snippet })
-                    console.log(channel)
+                    const channelVideos = await youtubeService.getChannelVideos(channelSelected.items[0].id)
+                    const videosIds = getVideosIds(channelVideos)
+                    const promises = videosIds.map(id => youtubeService.getVideoInfo(id))
+                    const allVideos = await Promise.all(promises.slice(0, 5))
+
+                    const embebedURLs = allVideos.map(video => video.items[0].player.embedHtml)
+
+                    const videos = embebedURLs.map(embebedURL => {
+                        const parser = new DOMParser()
+                        const doc = parser.parseFromString(embebedURL, 'text/html')
+                        const iframeSrc = doc.querySelector('iframe').getAttribute('src')
+
+                        return iframeSrc
+                    })
+
+                    setVideos(videos)
+
                 } else {
                     console.log('El resultado no es un canal de YouTube.');
                 }
@@ -82,13 +105,18 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                 console.log('No se encontraron canales de YouTube.');
             }
         } catch (err) {
-            console.err(err);
+            console.log(err);
         }
     }
 
     const handleInputChange = (e) => {
         const { value } = e.target
         setSearchQuery(value)
+    }
+
+    const getVideosIds = (channelVideos) => {
+        const allVideosIds = channelVideos.items.map(item => item.id.videoId)
+        return allVideosIds
     }
 
 
@@ -109,33 +137,34 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
             </Box>
             <section className='channel-section'>
                 {
+                    !canShow ? (
 
-                    channel.id !== "" && (
-                        <>
-                            <div className='details'>
-                                <div className='header-img-section'>
-                                    <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXZiEpBJMMszFTf1eL-YH2PMBSEQ7Vem-hWMflpiw=s176-c-k-c0x00ffffff-no-rj" alt='imagen del canal' />
-                                    {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} /> */}
-                                </div>
-                                <div className='header-channel-section'>
-                                    {/* <h2>{channel.snippet.title}</h2> */}
-                                    {/* <h3>{channel.snippet.customUrl}</h3> */}
-
+                        channel.id !== "" && (
+                            <>
+                                <div className='details'>
+                                    <div className='header-img-section'>
+                                        {/* <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXZiEpBJMMszFTf1eL-YH2PMBSEQ7Vem-hWMflpiw=s176-c-k-c0x00ffffff-no-rj" alt='imagen del canal' /> */}
+                                        <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
+                                    </div>
+                                    <div className='header-channel-section'>
+                                        <h2>{channel.snippet.title}</h2>
+                                        <h3>{channel.snippet.customUrl}</h3>
+                                        {/* 
                                     <h2>Un titulo</h2>
-                                    <h3>@ShinChanES</h3>
-                                    <ModalInfo description={channel.snippet.description}></ModalInfo>
+                                    <h3>@ShinChanES</h3> */}
+                                        <button onClick={() => setCanShow(true)}>VER MÁS</button>
+                                        {/* <ModalInfo description={channel.snippet.description}></ModalInfo> */}
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='header-description-section'>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, deserunt beatae vitae enim eaque minus. Soluta distinctio labore repudiandae eaque, dolore commodi enim nisi illum maiores sequi deserunt autem quia!</p>
-                            </div>
-                        </>
+                                <div className='header-description-section'>
+                                    <p>{channel.snippet.description}</p>
+                                </div>
+                            </>
+                        )) : (
+                        <VideoList videos={videos}></VideoList>
                     )
                 }
-
-
-
 
                 {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
                 <ul>

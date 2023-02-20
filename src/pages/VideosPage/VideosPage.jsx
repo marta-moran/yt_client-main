@@ -1,8 +1,13 @@
+import { useParams } from 'react-router-dom'
 import './VideosPage.css'
 
 const VideosPage = () => {
+
+
     return (
-        <div>VideosPage</div>
+        <div>
+
+        </div>
     )
 }
 
