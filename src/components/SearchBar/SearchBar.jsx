@@ -57,7 +57,7 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
 
     const [searchQuery, setSearchQuery] = useState("")
     const [channel, setChannel] = useState({
-        id: '',
+        id: 'a',
         snippet: ''
     });
 
@@ -100,19 +100,35 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
 
     return (
         <>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }} className="search-form">
                 {/* <SearchIcon /> */}
                 <InputUnstyled onChange={handleInputChange} className='SearchInput' slots={{ input: StyledInputElement }} {...props} ref={ref} />
-                <SubmitButton>Search</SubmitButton>
+                <div>
+                    <SubmitButton>Search</SubmitButton>
+                </div>
             </Box>
             <section className='channel-section'>
                 {
-                    channel && (
+
+                    channel.id !== "" && (
                         <>
-                            <div className='header-channel-section'>
-                                <h2>{channel.snippet.title}</h2>
-                                <ModalInfo description={channel.snippet.description}></ModalInfo>
-                                {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} /> */}
+                            <div className='details'>
+                                <div className='header-img-section'>
+                                    <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXZiEpBJMMszFTf1eL-YH2PMBSEQ7Vem-hWMflpiw=s176-c-k-c0x00ffffff-no-rj" alt='imagen del canal' />
+                                    {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} /> */}
+                                </div>
+                                <div className='header-channel-section'>
+                                    {/* <h2>{channel.snippet.title}</h2> */}
+                                    {/* <h3>{channel.snippet.customUrl}</h3> */}
+
+                                    <h2>Un titulo</h2>
+                                    <h3>@ShinChanES</h3>
+                                    <ModalInfo description={channel.snippet.description}></ModalInfo>
+
+                                </div>
+                            </div>
+                            <div className='header-description-section'>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. SLorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, deserunt beatae vitae enim eaque minus. Soluta distinctio labore repudiandae eaque, dolore commodi enim nisi illum maiores sequi deserunt autem quia!</p>
                             </div>
                         </>
                     )

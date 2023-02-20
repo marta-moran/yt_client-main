@@ -5,7 +5,41 @@
     background-position: 300px center;
 }
 
-.header-channel-section {
+.header-description-section {
+    padding: 0.5em 2em;
+    overflow: scroll;
+}
+
+.channel-section {
+    margin-top: 2.2em;
+}
+
+.details {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start
+}
+
+.header-channel-section button {
+    padding: 0.5em;
+    background-color: rgb(255, 255, 57);
+    color: white;
+    margin-left: 1em;
+    font-weight: 700;
+    border-radius: 50px;
+    font-size: 1.1em;
+
+}
+
+.header-channel-section>div {
     display: flex;
     flex-direction: row;
 }
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-form button {}

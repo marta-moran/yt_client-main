@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './Modal.css'
 
+
 function ModalInfo({ description }) {
 
     const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ function ModalInfo({ description }) {
 
     return (
         <div>
-            <Button onClick={handleOpen}>VER MÁS</Button>
+            <Button onClick={handleOpen}>INFO</Button>
             <Modal className="modal"
                 open={open}
                 onClose={handleClose}
