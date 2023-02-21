@@ -1,7 +1,8 @@
+import './Channel.css'
 function HeaderChannel({ channel }) {
     console.log("LAS PROPS-----------------", channel)
     return (
-        <>
+        <section className='info-channel'>
             <div className='details'>
                 <div className='header-img-section'>
                     <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
@@ -16,7 +17,7 @@ function HeaderChannel({ channel }) {
             <div className='header-description-section'>
                 <p>{channel.snippet.description}</p>
             </div>
-        </>
+        </section>
     )
 }
 

@@ -17,7 +17,7 @@ class YoutubeService {
     }
 
     getChannelVideos(channelId) {
-        return this.api.get(`/search?key=${process.env.REACT_APP_API_KEY}&channelId=${channelId}&type=video&part=snippet,id&order=date&maxResults=50`).then(({ data }) => data)
+        return this.api.get(`/search?key=${process.env.REACT_APP_API_KEY}&channelId=${channelId}&type=video&part=snippet,id&order=date&maxResults=15`).then(({ data }) => data)
     }
 
     getVideoInfo(videoId) {

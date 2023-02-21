@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import youtubeService from "../../services/youtube.service"
 import VideoList from "../VideoList/VideoList"
 import HeaderChannel from "./HeaderChannel"
+
 
 function Channel() {
     const { id } = useParams()
@@ -13,17 +14,6 @@ function Channel() {
         snippet: ''
     });
 
-    // const getChannel = async () => {
-    //     try {
-    //         const channelSelected = youtubeService.getOneChannel(id)
-    //         setChannel(channelSelected)
-    //         console.log(channelSelected)
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-
-    // }
-
     const getVideos = async () => {
         try {
             //primero busco los vídeos del canal
@@ -33,7 +23,8 @@ function Channel() {
             //hago una promesa por cada vídeo
             const promises = videosIds.map(id => youtubeService.getVideoInfo(id))
             //espero a que se revuelvan todas las promesas para poder obtener el iframe
-            const allVideos = await Promise.all(promises.slice(0, 5)) //lo parto para que no se me agoten las llamadas que son muy limitadas
+            //const allVideos = await Promise.all(promises.slice(0, 7)) //lo parto para que no se me agoten las llamadas que son muy limitadas
+            const allVideos = await Promise.all(promises)
             const embebedURLs = allVideos.map(video => video.items[0].player.embedHtml)
 
             /*
@@ -78,10 +69,12 @@ function Channel() {
         <div>
             {
                 channel.id && (
-                    <HeaderChannel channel={channel}></HeaderChannel>
+                    <>
+                        <HeaderChannel channel={channel}></HeaderChannel>
+                        <Link to={`/dashboard/${channel.id}`}>ver metricaaass</Link>
+                    </>
                 )
             }
-
             <VideoList videos={videos}></VideoList>
         </div>
     )

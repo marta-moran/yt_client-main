@@ -1,8 +1,11 @@
+import Dashboard from '../../components/Dashboard/Dashboard'
 import './DashBoard.css'
 
 const DashBoard = () => {
     return (
-        <div>DashBoard</div>
+        <div>
+            <Dashboard></Dashboard>
+        </div>
     )
 }
 

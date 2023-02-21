@@ -65,10 +65,6 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
         snippet: ''
     });
 
-    // const [videos, setVideos] = useState([])
-    // const [canShow, setCanShow] = useState(false)
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -92,8 +88,6 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
             console.log(err);
         }
     }
-
-
 
     const handleInputChange = (e) => {
         const { value } = e.target
@@ -119,10 +113,8 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                 </div>
             </Box>
             {
-                channel.id ? (
+                channel.id && (
                     <Link to={`/search/${channel.id}`}><HeaderChannel channel={channel}></HeaderChannel></Link>
-                ) : (
-                    <p>No hay resultados :(</p>
                 )
             }
         </>

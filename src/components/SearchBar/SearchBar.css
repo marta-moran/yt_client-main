@@ -13,11 +13,7 @@
     margin-top: 2.2em;
 }
 
-.details {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start
-}
+
 
 .header-channel-section button {
     padding: 0.5em;
