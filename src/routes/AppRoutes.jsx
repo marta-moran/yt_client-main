@@ -6,6 +6,7 @@ import DashBoardPage from '../pages/DashBoardPage/DashBoard'
 import SearchPage from '../pages/Search/SearchPage'
 import VideosPage from '../pages/VideosPage/VideosPage'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
+import ChannelPage from '../pages/ChannelPage/ChannelPage'
 
 const AppRoutes = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
             <Route path="/signup" element={<SignupPage />}></Route>
             <Route path="/dashboard/:channel_id" element={<DashBoardPage />}></Route>
             <Route path="/search" element={<SearchPage />}></Route>
+            <Route path="/search/:id" element={<ChannelPage />}></Route>
 
 
             <Route path="/videos/:videosSrc" element={<VideosPage />}></Route>

@@ -7,7 +7,8 @@ import { forwardRef, useEffect, useState } from 'react';
 import youtubeService from '../../services/youtube.service';
 // import ModalInfo from '../Modal/Modal';
 
-import VideoList from '../VideoList/VideoList';
+import HeaderChannel from '../Channel/HeaderChannel';
+import { Link } from 'react-router-dom';
 
 
 const blue = {
@@ -64,8 +65,8 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
         snippet: ''
     });
 
-    const [videos, setVideos] = useState([])
-    const [canShow, setCanShow] = useState(false)
+    // const [videos, setVideos] = useState([])
+    // const [canShow, setCanShow] = useState(false)
 
 
 
@@ -81,23 +82,6 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                 if (channelItem.id.kind === 'youtube#channel') {
                     const channelSelected = await youtubeService.getOneChannel(channelItem.id.channelId);
                     setChannel({ id: channelSelected.items[0].id, snippet: channelSelected.items[0].snippet })
-                    const channelVideos = await youtubeService.getChannelVideos(channelSelected.items[0].id)
-                    const videosIds = getVideosIds(channelVideos)
-                    const promises = videosIds.map(id => youtubeService.getVideoInfo(id))
-                    const allVideos = await Promise.all(promises.slice(0, 5))
-
-                    const embebedURLs = allVideos.map(video => video.items[0].player.embedHtml)
-
-                    const videos = embebedURLs.map(embebedURL => {
-                        const parser = new DOMParser()
-                        const doc = parser.parseFromString(embebedURL, 'text/html')
-                        const iframeSrc = doc.querySelector('iframe').getAttribute('src')
-
-                        return iframeSrc
-                    })
-
-                    setVideos(videos)
-
                 } else {
                     console.log('El resultado no es un canal de YouTube.');
                 }
@@ -109,16 +93,12 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
         }
     }
 
+
+
     const handleInputChange = (e) => {
         const { value } = e.target
         setSearchQuery(value)
     }
-
-    const getVideosIds = (channelVideos) => {
-        const allVideosIds = channelVideos.items.map(item => item.id.videoId)
-        return allVideosIds
-    }
-
 
     useEffect(() => {
         console.log(channel);
@@ -133,52 +113,18 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
     return (
         <>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }} className="search-form">
-                {/* <SearchIcon /> */}
                 <InputUnstyled onChange={handleInputChange} className='SearchInput' slots={{ input: StyledInputElement }} {...props} ref={ref} />
                 <div>
                     <SubmitButton>Search</SubmitButton>
                 </div>
             </Box>
-            <section className='channel-section'>
-                {
-                    !canShow ? (
-
-                        channel.id !== "" && (
-                            <>
-                                <div className='details'>
-                                    <div className='header-img-section'>
-                                        {/* <img src="https://yt3.googleusercontent.com/ytc/AL5GRJXZiEpBJMMszFTf1eL-YH2PMBSEQ7Vem-hWMflpiw=s176-c-k-c0x00ffffff-no-rj" alt='imagen del canal' /> */}
-                                        <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
-                                    </div>
-                                    <div className='header-channel-section'>
-                                        <h2>{channel.snippet.title}</h2>
-                                        <h3>{channel.snippet.customUrl}</h3>
-                                        {/* 
-                                    <h2>Un titulo</h2>
-                                    <h3>@ShinChanES</h3> */}
-                                        <button onClick={() => setCanShow(true)}>VER MÁS</button>
-                                        {/* <ModalInfo description={channel.snippet.description}></ModalInfo> */}
-
-                                    </div>
-                                </div>
-                                <div className='header-description-section'>
-                                    <p>{channel.snippet.description}</p>
-                                </div>
-                            </>
-                        )) : (
-                        <VideoList videos={videos}></VideoList>
-                    )
-                }
-
-                {/* <img src={channel.snippet.thumbnails.default.url} alt={channel.snippet.title} />
-                <ul>
-                    {Object.entries(channel).map(([key, value]) => (
-                        <li key={key}>
-                            <strong>{key}:</strong> {value}
-                        </li>
-                    ))}
-                </ul> */}
-            </section>
+            {
+                channel.id ? (
+                    <Link to={`/search/${channel.id}`}><HeaderChannel channel={channel}></HeaderChannel></Link>
+                ) : (
+                    <p>No hay resultados :(</p>
+                )
+            }
         </>
     );
 });

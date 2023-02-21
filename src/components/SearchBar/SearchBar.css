@@ -41,4 +41,11 @@
     align-items: center;
 }
 
-.search-form button {}
+a {
+    color: rgb(29, 29, 29);
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(29, 29, 29);
+}
