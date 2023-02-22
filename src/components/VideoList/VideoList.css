@@ -40,10 +40,15 @@
     font-weight: 300;
 }
 
-@media screen and (min-width: 1024px) {
-    .iframes {
-        display: flex;
-        flex-direction: row;
+.tag {
+    display: flex;
+    justify-content: space-evenly;
 
-    }
+}
+
+.tag span {
+    padding: 0.5em;
+    background-color: rgba(160, 160, 160, 0.156);
+    border-radius: 20px;
+    font-weight: 500;
 }

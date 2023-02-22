@@ -2,28 +2,39 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../contexts/auth.context"
 import './Profile.css'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from "react-router-dom";
 
 
 function Profile() {
     const { user } = useContext(AuthContext)
     const itemsLocalStorage = []
+    const navigate = useNavigate()
+    const [historial, setHistorial] = useState([])
+
 
 
     const getLocalStorage = () => {
-        let almacenamiento = localStorage.getItem("historial"); // "shin chan, lady gaga"
+        let almacenamiento = localStorage.getItem("historial");
         if (almacenamiento) {
-            let items = almacenamiento.split(","); // ["shin chan", "lady gaga"]
+            let items = almacenamiento.split(",");
 
             for (let i = 0; i < items.length; i++) {
                 itemsLocalStorage.push(items[i])
             }
+
+            setHistorial(itemsLocalStorage)
         }
+    }
+
+    const handleClick = () => {
+        localStorage.removeItem('historial')
+        setHistorial([])
     }
 
 
     useEffect(() => {
         getLocalStorage()
-    }, [getLocalStorage()])
+    }, [])
 
     return (
         <>
@@ -45,11 +56,11 @@ function Profile() {
                             <div>
                                 <h4>Historial de búsquedas</h4>
                                 {
-                                    itemsLocalStorage.length !== 0 ? itemsLocalStorage.map((item, index) => <p key={index}>{item}</p>) : null
+                                    historial.length !== 0 ? historial.map((item, index) => <p key={index}>{item}</p>) : null
                                 }
                             </div>
                             <div>
-                                <DeleteIcon onClick={() => localStorage.removeItem('historial')} sx={{ color: 'red', fontSize: '2.5em' }}></DeleteIcon>
+                                <DeleteIcon onClick={handleClick} sx={{ color: 'red', fontSize: '2.5em' }}></DeleteIcon>
                             </div>
                         </div>
                     </>

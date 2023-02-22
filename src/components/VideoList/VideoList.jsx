@@ -40,9 +40,12 @@ function VideoList({ videos, info }) {
                                         <p>{moment(info[index].publishedAt).format("DD [de] MMMM [de] YYYY")}</p>
 
                                     </div>
-                                    {
-                                        info[index].tags ? info[index].tags.map(tag => <span>{tag}</span>) : null
-                                    }
+                                    <div className='tag'>
+                                        {
+                                            info[index].tags ? info[index].tags.slice(0, 4).map(tag => <span >{tag}</span>) : null
+                                        }
+                                    </div>
+
 
                                 </>
 
