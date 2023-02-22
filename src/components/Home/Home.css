@@ -32,3 +32,16 @@
 .home-section a:visited {
     color: rgb(29, 29, 29);
 }
+
+
+@media screen and (min-width: 1024px) {
+    .home-section {
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 3em;
+    }
+
+    .home-section button {
+        margin-top: 5em;
+    }
+}

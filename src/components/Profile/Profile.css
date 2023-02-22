@@ -1,0 +1,22 @@
+.profile-content img {
+    width: 80%;
+    margin-right: 1em;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    margin: 2em
+}
+
+.grey {
+    font-weight: 300;
+    color: rgb(50, 50, 50);
+}
+
+.history {
+    margin: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}

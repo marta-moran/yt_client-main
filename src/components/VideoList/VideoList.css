@@ -2,16 +2,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin: 0.5em 2em;
+    margin-bottom: 4em
 }
 
-
-.button {
-    margin: 2em;
+.pagination button {
+    margin: 0 0.5em
 }
 
 .video {
-    padding: 2em;
+    padding: 2em 2em 0.5em 2em;
     border: none;
 }
 
@@ -26,6 +25,20 @@
     flex-direction: column;
 }
 
+.video-details {
+    /* display: flex; */
+    margin: 0 2em 1em 2em
+}
+
+.video-details p:nth-child(1) {
+    color: rgb(181, 54, 183);
+    font-weight: 500;
+}
+
+.video-details p:nth-child(2) {
+    color: rgb(65, 65, 65);
+    font-weight: 300;
+}
 
 @media screen and (min-width: 1024px) {
     .iframes {

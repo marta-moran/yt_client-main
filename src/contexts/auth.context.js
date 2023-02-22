@@ -28,7 +28,9 @@ const AuthProviderWrapper = (props) => {
             UsersService
                 .getLoggedUser(token)
                 .then(user => {
+                    console.log("hola?")
                     setUser(user)
+                    console.log("USER", user)
                     setIsLoading(false)
                 })
                 .catch(e => console.log(e))
@@ -44,6 +46,7 @@ const AuthProviderWrapper = (props) => {
     const logoutUser = () => {
         setUser(null)
         setIsLoading(false)
+        localStorage.removeItem("historial")
         localStorage.removeItem("authToken")
         navigate('/login')
     }

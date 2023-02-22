@@ -2,8 +2,6 @@ import React from 'react'
 import { Container, CssBaseline, Box, Avatar, Grid, TextField, Typography } from '@mui/material';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
 
 const LoginForm = ({ handleInputChange, handleSubmit }) => {
 

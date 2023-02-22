@@ -65,13 +65,16 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
         snippet: ''
     });
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
+        let localStorageExistente = localStorage.getItem("historial");
+        let listaActualizada = localStorageExistente ? localStorageExistente + ", " + searchQuery : searchQuery
+        localStorage.setItem('historial', listaActualizada)
+
         try {
             const channels = await youtubeService.getChannels(searchQuery);
-
             if (channels.items.length > 0) {
                 const channelItem = channels.items[0];
 
@@ -92,11 +95,11 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
     const handleInputChange = (e) => {
         const { value } = e.target
         setSearchQuery(value)
+
     }
 
-    useEffect(() => {
-        console.log(channel);
 
+    useEffect(() => {
         youtubeService.getChannelStats(channel.id)
             .then(stats => console.log(stats))
 

@@ -1,8 +1,11 @@
+import Profile from '../../components/Profile/Profile'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
     return (
-        <div>ProfilePage</div>
+        <>
+            <Profile></Profile>
+        </>
     )
 }
 

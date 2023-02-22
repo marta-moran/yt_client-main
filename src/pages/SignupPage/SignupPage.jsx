@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import AuthService from '../../services/auth.service'
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 const SignupPage = () => {
 
     const [user, setUser] = useState({ username: "", password: "", email: "" })
 
     const navigate = useNavigate()
+
+    const [error, setError] = useState(false)
+    const [errorDescription, setErrorDescription] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -17,9 +21,13 @@ const SignupPage = () => {
             .signup(user)
             .then(user => {
                 navigate('/login')
-                // DAR LA BIENVENIDA AL USUARIO!!!
+
             })
-            .catch(e => console.log(e))
+            .catch(e => {
+                console.log(e.response.data.err)
+                setError(true)
+                setErrorDescription(e.response.data.err)
+            })
     }
 
     const handleInputChange = (e) => {
@@ -32,7 +40,13 @@ const SignupPage = () => {
     }, [user])
 
     return (
-        <SignUpForm handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+        <>
+            <SignUpForm handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+            {
+                error && <Alert severity="error">{errorDescription}</Alert>
+            }
+        </>
+
     )
 }
 

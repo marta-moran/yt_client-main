@@ -10,11 +10,14 @@ import Fab from '@mui/material/Fab';
 function Channel() {
     const { id } = useParams()
     const [videos, setVideos] = useState([])
-    // const [channel, setChannel] = useState([])
     const [channel, setChannel] = useState({
         id: '',
         snippet: ''
     });
+    const [infoVideos, setInfoVideos] = useState({
+        snippet: ''
+
+    })
 
     const getVideos = async () => {
         try {
@@ -27,6 +30,8 @@ function Channel() {
             //espero a que se revuelvan todas las promesas para poder obtener el iframe
             //const allVideos = await Promise.all(promises.slice(0, 7)) //lo parto para que no se me agoten las llamadas que son muy limitadas
             const allVideos = await Promise.all(promises)
+
+            setInfoVideos(allVideos.map(video => video.items[0].snippet))
             const embebedURLs = allVideos.map(video => video.items[0].player.embedHtml)
 
             /*
@@ -56,6 +61,7 @@ function Channel() {
             })
             .catch(error => console.log(error))
         getVideos()
+
     }, [])
 
 
@@ -82,7 +88,7 @@ function Channel() {
                     </>
                 )
             }
-            <VideoList videos={videos}></VideoList>
+            <VideoList videos={videos} info={infoVideos}></VideoList>
         </div>
     )
 }
