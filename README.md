@@ -22,7 +22,7 @@ Para acceder a la aplicación y sus funcionalidades, es necesario iniciar sesió
 | /search                      | Busca cualquier canal de youtube         |
 | /videos/:videosSrc                     |  Lista de vídeos de un canal concreto         |
 | /search/:id                     |  Canal con sus respectivos vídeos         |
-| /dashboard/:channel_id                      |  YT Channel Dashboard          |
+| /dashboard/:id                      |  YT Channel Dashboard          |
 | /my-profile                 |  Perfil del usuario (solo puede acceder el SEO) con su historial de búsquedas     |
 | /signup                   |  Sign up page         |
 | /login                      |  Login page solo visible para el Amdmin (CEO)         |
