@@ -9,6 +9,15 @@ class UserService extends InitAxios {
         return this.api.get('/list').then(({ data }) => data)
     }
 
+    //comprueba si es ceo
+    isAdmin(token) {
+        const headers = {
+            Authorization: `Bearer ${token}`
+        }
+
+        return this.api.get('/isAdmin', { headers }).then(({ data }) => data)
+    }
+
     getLoggedUser(token) {
         const headers = {
             Authorization: `Bearer ${token}`
