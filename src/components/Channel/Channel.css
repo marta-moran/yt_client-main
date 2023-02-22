@@ -18,8 +18,14 @@
 }
 
 .header-description-section p {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-left: 0.9em;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2em;
 }
 
 
@@ -30,4 +36,11 @@
         align-items: space-evenly;
         margin-left: 3em;
     }
+
+    .flex-end {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 13em;
+    }
+
 }

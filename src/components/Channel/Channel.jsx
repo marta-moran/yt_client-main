@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom"
 import youtubeService from "../../services/youtube.service"
 import VideoList from "../VideoList/VideoList"
 import HeaderChannel from "./HeaderChannel"
+import AddIcon from '@mui/icons-material/Add'
+import Fab from '@mui/material/Fab';
 
 
 function Channel() {
@@ -71,7 +73,12 @@ function Channel() {
                 channel.id && (
                     <>
                         <HeaderChannel channel={channel}></HeaderChannel>
-                        <Link to={`/dashboard/${channel.id}`}>ver metricaaass</Link>
+                        <div className="flex-end">
+
+                            <Link to={`/dashboard/${channel.id}`}><Fab size="small" color="secondary" aria-label="add">
+                                <AddIcon />
+                            </Fab></Link>
+                        </div>
                     </>
                 )
             }

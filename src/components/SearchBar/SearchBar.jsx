@@ -112,11 +112,14 @@ const CustomInput = forwardRef(function CustomInput(props, ref) {
                     <SubmitButton>Search</SubmitButton>
                 </div>
             </Box>
-            {
-                channel.id && (
-                    <Link to={`/search/${channel.id}`}><HeaderChannel channel={channel}></HeaderChannel></Link>
-                )
-            }
+            <div className='channel'>
+                {
+                    channel.id && (
+                        <Link to={`/search/${channel.id}`}><HeaderChannel channel={channel}></HeaderChannel></Link>
+                    )
+                }
+            </div>
+
         </>
     );
 });

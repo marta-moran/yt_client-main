@@ -137,6 +137,8 @@ function ResponsiveAppBar() {
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
+
+                            style={{ color: 'white' }}
                         >
                             MGTC
                         </Typography>
@@ -186,7 +188,7 @@ function ResponsiveAppBar() {
                         </Box>
                     </Toolbar>
                 </Container>
-            </AppBar >
+            </AppBar>
         </ThemeProvider>
     );
 }

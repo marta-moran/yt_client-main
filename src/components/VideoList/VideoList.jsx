@@ -1,5 +1,7 @@
-import Pagination from '@mui/material/Pagination';
+import './VideoList.css'
 import { useState } from 'react';
+import Fab from '@mui/material/Fab';
+
 
 function VideoList({ videos }) {
     console.log(videos)
@@ -22,17 +24,21 @@ function VideoList({ videos }) {
 
     return (
         <>
-            <div>
-                {
-                    pages.map((page) => {
-                        return (
-                            <button onClick={() => setCurrentPage(page)}>{page} </button>
-                        )
-                    })
-                }
-                {
-                    currentVideosPerPage.map(video => <iframe controls src={video} key={video} height="270" width="400" title={video}></iframe>)
-                }
+            <div className='video-list'>
+                <div className='iframes'>
+                    {
+                        currentVideosPerPage.map(video => <iframe controls className="video" src={video} key={video} height="180" width="310" title={video}></iframe>)
+                    }
+                </div>
+                <div className='pagination'>
+                    {
+                        pages.map((page) => {
+                            return (
+                                <Fab className="button" color="primary" size="small" onClick={() => setCurrentPage(page)}>{page}</Fab>
+                            )
+                        })
+                    }
+                </div>
             </div>
 
         </>

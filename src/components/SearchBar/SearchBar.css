@@ -37,11 +37,11 @@
     align-items: center;
 }
 
-a {
+.channel a {
     color: rgb(29, 29, 29);
     text-decoration: none;
 }
 
-a:visited {
+.channel a:visited {
     color: rgb(29, 29, 29);
 }

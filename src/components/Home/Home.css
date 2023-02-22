@@ -1,0 +1,34 @@
+.home-section {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 2.1em;
+    align-items: center;
+    /* text-align: justify; */
+}
+
+.home-section p {
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.warning {
+    color: #007FFF;
+}
+
+
+.color {
+
+    color: #007FFF;
+}
+
+.home-section a {
+    color: rgb(29, 29, 29);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.home-section a:visited {
+    color: rgb(29, 29, 29);
+}

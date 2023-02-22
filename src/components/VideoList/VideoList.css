@@ -1,0 +1,36 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0.5em 2em;
+}
+
+
+.button {
+    margin: 2em;
+}
+
+.video {
+    padding: 2em;
+    border: none;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.iframes {
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .iframes {
+        display: flex;
+        flex-direction: row;
+
+    }
+}

@@ -2,16 +2,27 @@ import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import youtubeService from "../../services/youtube.service"
 import Chart from 'chart.js/auto'
+import './Dashboard.css'
+
+
 
 function Dashboard() {
     const { id } = useParams()
     const [stats, setStats] = useState(null)
     const chartRef = useRef(null)
+    const [channel, setChannel] = useState({ id: '', snippet: '' })
 
     useEffect(() => {
         youtubeService.getChannelStats(id)
-            .then(stats => setStats(stats.items[0].statistics))
+            .then(stats => {
+                console.log(stats)
+                setStats(stats.items[0].statistics)
+                setChannel(stats.items[0].snippet)
+                // setChannel({ id: stats.items[0].id, snippet: stats.items[0].snippet })
+            })
     }, [])
+
+    console.log("wee", channel)
 
     useEffect(() => {
         if (chartRef && chartRef.current) {
@@ -47,8 +58,29 @@ function Dashboard() {
     }, [stats])
 
     return (
-        <div>
-            <canvas ref={chartRef}></canvas>
+        <div className="statistics">
+            {
+                channel && stats && (
+                    <>
+                        <div>
+                            <div className="dashboard-info">
+                                <div>
+                                    <img src={channel.thumbnails.default.url} alt={channel.title} />
+                                </div>
+                                <div>
+                                    <h2>{channel.title}</h2>
+                                    <h3>{channel.customUrl}</h3>
+                                </div>
+                            </div>
+
+                            <p>{stats.subscriberCount} suscriptores</p>
+                            <p>{stats.videoCount} vídeos</p>
+                            <p>{stats.viewCount} visitas</p>
+                        </div>
+                        <canvas ref={chartRef} className="chart-canvas"></canvas>
+                    </>
+                )
+            }
         </div>
     )
 }
