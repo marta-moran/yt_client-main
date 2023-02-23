@@ -12,7 +12,7 @@ npm install
 ```
 # Auth de la Aplicación
 
-Para acceder a la aplicación y sus funcionalidades, es necesario iniciar sesión como CEO, que es el administrador. Ya que por defecto el usuario creado desde el signup es un usuario normal, se debe entrar con el usuario **creo@ravenloop.com** y contraseña **hola123**. Es **importante** entrar con este usuario, porque es el único que tiene permiso para acceder a las rutas de búsqueda de contenidos
+Para acceder a la aplicación y sus funcionalidades, es necesario iniciar sesión como CEO, que es el administrador. Ya que por defecto el usuario creado desde el signup es un usuario normal, se debe entrar con el usuario **ceo@ravenloop.com** y contraseña **hola123**. Es **importante** entrar con este usuario, porque es el único que tiene permiso para acceder a las rutas de búsqueda de contenidos
 
 # Rutas de la aplicación:
 
