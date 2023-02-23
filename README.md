@@ -25,4 +25,4 @@ Para acceder a la aplicación y sus funcionalidades, es necesario iniciar sesió
 | /dashboard/:id                      |  YT Channel Dashboard          |
 | /my-profile                 |  Perfil del usuario (solo puede acceder el CEO) con su historial de búsquedas     |
 | /signup                   |  Sign up page         |
-| /login                      |  Login page )         |
+| /login                      |  Login page          |
