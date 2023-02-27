@@ -1,4 +1,4 @@
-# MGCT: Una aplicación de búsqueda de contenidos en Youtube creada usando el Stack MERN
+# MGTC: Una aplicación de búsqueda de contenidos en Youtube creada usando el Stack MERN
 
 # Aplicación desplegada
 
