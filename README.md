@@ -1,4 +1,4 @@
-# MGMT: Una aplicación de búsqueda de contenidos en Youtube creada usando el Stack MERN
+# MGCT: Una aplicación de búsqueda de contenidos en Youtube creada usando el Stack MERN
 
 # Aplicación desplegada
 
